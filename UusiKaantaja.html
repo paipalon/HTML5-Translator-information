@@ -1,0 +1,88 @@
+
+<HTML>
+<HEAD>
+<TITLE> KÄÄNTÄJÄTIEDOSTO </TITLE>
+<meta charset='utf-8'>
+ <script src="modernizr.min.js"></script>
+ <script>
+ 
+ function uusi_kaantaja(){
+  //alert("Kääntäjän lisäys aloitetaan");
+  var en = document.lomake.etunimi.value;
+  var sn = document.lomake.sukunimi.value;
+  var pk = document.lomake.paikkakunta.value;
+  var sp = document.lomake.email.value;
+  var t = document.lomake.tutkinto.value;
+  var av = document.lomake.aloitusvuosi.value;
+  var k = document.lomake.kielet.value;
+  var ea = document.lomake.erikoisalat.value;
+  
+  var i = 0;
+  if (en.trim().length < 1){ 
+	alert("Syötä etunimi");
+  }
+  else if (sn.trim().length < 1){ 
+	alert("Syötä sukunimi");
+  }
+  else {
+   alert("Aloitetaan kääntäjän tallentaminen");
+   apumuuttuja = JSON.parse(localStorage.getItem("keentaja"));
+   for (am in apumuuttuja) {i++;}
+	keentaja = new Object();
+   if (i>0){   
+     keentaja = JSON.parse(localStorage.getItem("keentaja"));
+   }
+   tunnus = (en +" "+ sn);
+   //alert("Tallennetaan kääntäjä tunnuksella "+tunnus);
+   try
+     {keentaja[tunnus] = {etunimi:en,sukunimi:sn,paikkakunta:pk,sahkoposti:sp,aloitusvuosi:av,tutkinto:t,kielet:k,erikoisalat:ea};}
+   catch(err) 
+    {alert("Uuden kääntäjän luonti ei onnistunut");}
+   try
+     {localStorage.setItem("keentaja",JSON.stringify(keentaja));
+	  alert("Tallennettiin "+en+" "+sn+" "+pk+" "+sp+" "+av+" "+t+" "+k+" "+ea);}
+   catch(err) 
+    {alert("Tallentaminen ei onnistunut");}
+	
+  } 
+ }
+ 
+</script>
+</HEAD>
+<BODY>
+
+<FORM name="lomake" onSubmit="return false" style="color:fuchsia">
+
+  <h1> UUDEN KÄÄNTÄJÄN LISÄYS</h1>
+
+  <TABLE style="width:100%">
+  
+   <tr style="color:fuchsia">
+  
+    <td width="50%">
+     
+  Etunimi * <input type="text" name="etunimi"> <br><br>
+  Sukunimi * <input type="text" name="sukunimi"> <br><br>
+  Paikkakunta <input type="text" name="paikkakunta"> <br><br>  
+  Sähköposti  <input type="text" name="email"> <br><br> 
+  
+    <td/>
+  
+    <td> 
+  
+  Tutkinto <input type="text" name="tutkinto"> <br><br>
+  Aloitusvuosi<input type="text" name="aloitusvuosi"> <br><br>
+  Kielet <input type="text" name="kielet"> <br><br>
+  Erikoisalat <input type="text" name="erikoisalat"> <br><br>
+  
+    <button onclick="uusi_kaantaja()">Lisää</button><br><br>
+    <a href="Kääntäjätiedot.html">Aloitussivulle</a>
+    <td/>
+   
+   <tr/>
+   
+  <TABLE/>
+  
+</FORM>
+</BODY>
+</HTML>

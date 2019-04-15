@@ -1,0 +1,90 @@
+
+<HTML>
+<HEAD>
+<TITLE> UUSI KIRJA </TITLE>
+<meta charset='utf-8'>
+ <script src="modernizr.min.js"></script>
+ <script>
+
+ function uusi_kirja(){
+  var n = document.lomake.nimi.value;
+  var t = document.lomake.tekija.value;
+  var k = document.lomake.kaantaja.value;
+  var l = document.lomake.luokka.value;
+  var a = document.lomake.ap_nimi.value;
+  var ak = document.lomake.ap_kieli.value;
+  var i = 0;
+  if (n.trim().length < 1){ 
+	alert("Syötä kirjan nimi");
+  }
+  else if (t.trim().length < 1){ 
+	alert("Syötä tekijä");
+	document.lomake.tekija.value = t;
+  }
+  else if (k.trim().length < 1){ 
+	alert("Syötä kirjan kääntäjä");
+	document.lomake.kaantaja.value = k;
+  }
+  else {
+   apumuuttuja = JSON.parse(localStorage.getItem("kirja"));
+   for (am in apumuuttuja) {i++;}
+   kirja = new Object();
+   if (i>0){   
+     kirja = JSON.parse(localStorage.getItem("kirja"));
+   }
+   tunnus = (n +" " + t);
+   try
+     {kirja[tunnus] = {nimi:n,tekija:t,kaantaja:k,luokka:l,apnimi:a,apkieli:ak};}
+   catch(err) 
+    {alert("Uuden kirjän luonti ei onnistunut");}
+   try
+     {localStorage.setItem("kirja",JSON.stringify(kirja));
+	  //alert("Tallennettiin "+n+" "+t+" "+k+" "+l+" "+a);
+	  alert("Tallentaminen onnistui");}
+   catch(err) 
+    {alert("Tallentaminen ei onnistunut");};
+	
+  } 
+ }
+ 
+</script>
+</HEAD>
+<BODY>
+
+<FORM name="lomake" onSubmit="return false" style="color:fuchsia">
+
+  <h1> UUDEN KIRJAN LISÄYS</h1>
+
+  <TABLE style="width:100%; color:fuchsia">
+  
+   <tr>
+  
+    <td width="50%">
+     
+	Kirjan nimi * <input type="text" name="nimi"> <br><br>
+	Tekijä * <input type="text" name="tekija"> <br><br>
+	Kääntäjä * <input type="text" name="kaantaja"> <br><br>
+  
+  
+    <td/>
+  
+    <td> 
+   
+	Luokka <input type="text" name="luokka"> <br><br>
+	Alkuperäinen nimi <input type="text" name="ap_nimi"> <br><br>
+	Alkuperäiskieli <input type="text" name="ap_kieli"> <br><br>
+
+	<a href="Kääntäjätiedot.html">Aloitussivulle</a>
+   
+    <td/>
+   
+   <tr/>
+   
+  <TABLE/>
+  
+  
+  
+  
+</FORM>
+</BODY>
+</HTML>

@@ -1,0 +1,198 @@
+
+<HTML>
+<HEAD>
+<TITLE> KÄÄNTÄJÄTIEDOSTO </TITLE>
+<meta charset='utf-8'>
+ <script src="modernizr.min.js"></script>
+ <script>
+ 
+ function hae_kaantajat(){
+  var teksti = " ";
+  var i=0;
+  keentaja = JSON.parse(localStorage.getItem("keentaja"));
+  teksti += ("Kääntäjä        Paikkakunta Sähkoposti Tutkinto Aloitusvuosi Kielet Erikoisalat"+'\n');
+  teksti += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kaant in keentaja) {
+    k = keentaja[kaant];
+	i++;
+	teksti += (k.etunimi+" "+k.sukunimi+"  "+k.paikkakunta+"  "+k.sahkoposti+"  "+k.tutkinto+"  "+k.aloitusvuosi+"  "+k.kielet+"  "+k.erikoisalat+'\n');
+  }
+  teksti += ('\n'+"Kääntäjiä löytyi "+i);
+  document.lomake.tekstikentta.value = teksti;
+ }
+ 
+ function hae_kaantajat_kieli(){
+  var kl = document.lomake.kieli.value;
+  alert("Kieli on "+kl);
+  var teksti = " ";
+  var i=0;
+  keentaja = JSON.parse(localStorage.getItem("keentaja"));
+  teksti += ("Kääntäjä        Paikkakunta Sähkoposti Tutkinto Aloitusvuosi Kielet Erikoisalat"+'\n');
+  teksti += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kaant in keentaja) {
+    k = keentaja[kaant];
+	if(k.kielet==kl)
+		{teksti += (k.etunimi+" "+k.sukunimi+"  "+k.paikkakunta+"  "+k.sahkoposti+"  "+k.tutkinto+"  "+k.aloitusvuosi+"  "+k.kielet+"  "+k.erikoisalat+'\n');
+		i++;}
+  }
+  teksti += ('\n'+"Kääntäjiä löytyi "+i);
+  document.lomake.tekstikentta.value = teksti;
+ }
+ 
+ function hae_kaantajat_aloitusvuosi(){
+  alert("Kääntäjät aloitusvuoden mukaan");
+  var av = document.lomake.aloitusvuosi.value;
+  var teksti = " ";
+  var i=0;
+  keentaja = JSON.parse(localStorage.getItem("keentaja"));
+  teksti += ("Kääntäjä        Paikkakunta Sähkoposti Tutkinto Aloitusvuosi Kielet Erikoisalat"+'\n');
+  teksti += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kaant in keentaja) {
+    k = keentaja[kaant];
+	i++;
+	if(k.aloitusvuosi==av)
+		{teksti += (k.etunimi+" "+k.sukunimi+"  "+k.paikkakunta+"  "+k.sahkoposti+"  "+k.tutkinto+"  "+k.aloitusvuosi+"  "+k.kielet+"  "+k.erikoisalat+'\n');}
+  }
+  teksti += ('\n'+"Kääntäjiä löytyi "+i);
+  document.lomake.tekstikentta.value = teksti;
+ }
+ 
+ function hae_kaantajat_erikoisalat(){
+  var ea = document.lomake.erikoisalat.value;
+  var teksti = " ";
+  var i=0;
+  keentaja = JSON.parse(localStorage.getItem("keentaja"));
+  teksti += ("Kääntäjä        Paikkakunta Sähkoposti Tutkinto Aloitusvuosi Kielet Erikoisalat"+'\n');
+  teksti += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kaant in keentaja) {
+    k = keentaja[kaant];
+	if(k.erikoisalat==ea)
+		{teksti += (k.etunimi+" "+k.sukunimi+"  "+k.paikkakunta+"  "+k.sahkoposti+"  "+k.tutkinto+"  "+k.aloitusvuosi+"  "+k.kielet+"  "+k.erikoisalat+'\n');
+		i++;}
+  }
+  teksti += ('\n'+"Kääntäjiä löytyi "+i);
+  document.lomake.tekstikentta.value = teksti;
+ }
+ 
+ function hae_kirjat(){
+  var teksti2 = " ";
+  var i=0;
+  kirja = JSON.parse(localStorage.getItem("kirja"));
+  teksti2 += ("Kirja        Tekijä  Kääntäjä  Luokka  Alkuperäinen nimi  Alkuperäiskieli"+'\n');
+  teksti2 += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kj in kirja) {
+    b = kirja[kj];
+	i++;
+	teksti2 += (b.nimi+"   "+b.tekija+"  "+b.kaantaja+"  "+b.luokka+"  "+b.apnimi+"  "+b.apkieli+'\n');
+  }
+  teksti2 += ('\n'+"Kirjoja löytyi "+i);
+  document.lomake.tekstikentta2.value = teksti2;
+ }
+ 
+ function hae_kirjat_kaantajalle(){
+  var k = document.lomake.kaant.value;
+  var teksti2 = " ";
+  var i=0;
+  kirja = JSON.parse(localStorage.getItem("kirja"));
+  teksti2 += ("Kirja        Tekijä  Kääntäjä  Luokka  Alkuperäinen nimi  Alkuperäiskieli"+'\n');
+  teksti2 += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kj in kirja) {
+    b = kirja[kj];
+	if(b.kaantaja==k)
+	  {teksti2 += (b.nimi+"   "+b.tekija+"  "+b.kaantaja+"  "+b.luokka+"  "+b.apnimi+"  "+b.apkieli+'\n');
+	  i++;}
+  }
+  teksti2 += ('\n'+"Kirjoja löytyi "+i);
+  document.lomake.tekstikentta2.value = teksti2;
+ }
+ 
+ function hae_kirjat_luokka(){
+  var l = document.lomake.luokka.value;
+  var teksti2 = " ";
+  var i=0;
+  kirja = JSON.parse(localStorage.getItem("kirja"));
+  teksti2 += ("Kirja        Tekijä  Kääntäjä  Luokka  Alkuperäinen nimi  Alkuperäiskieli"+'\n');
+  teksti2 += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kj in kirja) {
+    b = kirja[kj];
+	if(b.luokka==l)
+	  {teksti2 += (b.nimi+"   "+b.tekija+"  "+b.kaantaja+"  "+b.luokka+"  "+b.apnimi+"  "+b.apkieli+'\n');
+	  i++;}
+  }
+  teksti2 += ('\n'+"Kirjoja löytyi "+i);
+  document.lomake.tekstikentta2.value = teksti2;
+ }
+ 
+ function hae_kirjat_kieli(){
+  var k = document.lomake.apkieli.value;
+  var teksti2 = " ";
+  var i=0;
+  kirja = JSON.parse(localStorage.getItem("kirja"));
+  teksti2 += ("Kirja        Tekijä  Kääntäjä  Luokka  Alkuperäinen nimi  Alkuperäiskieli"+'\n');
+  teksti2 += ("--------------------------------------------------------------------------------"+'\n'+'\n');
+  for (kj in kirja) {
+    b = kirja[kj];
+	if(b.apkieli==k)
+	  {teksti2 += (b.nimi+"  "+b.tekija+"  "+b.kaantaja+"  "+b.luokka+"  "+b.apnimi+"  "+b.apkieli+'\n');
+	  i++;}
+  }
+  teksti2 += ('\n'+"Kirjoja löytyi "+i);
+  document.lomake.tekstikentta2.value = teksti2;
+ }
+ 
+ function poista_kaantaja(){
+   alert("Poistetaan kääntäjä");
+   kaantaja = JSON.parse(localStorage.getItem("kaantaja"));
+  for (kaant in kaantaja) {
+    k = kaantaja[kaant];
+	if(k.sukunimi=="Testi")
+	  {alert("Poistettava löytyi");
+	  kaantaja.splice(kaant, 1);
+	  //removeItem(kaantaja[kaant]);
+	  //kirja[tunnus] = {nimi:n,tekija:t,kaantaja:k,luokka:l,apnimi:a,apkieli:ak
+	  i++;}
+  }
+  alert("Kääntäjä poistettiin");
+ }
+ 
+</script>
+</HEAD>
+<BODY>
+
+<FORM name="lomake" onSubmit="return false">
+
+  <TABLE style="width:100%">
+  
+  <tr style="color:fuchsia">
+  
+  <td width="50%">
+	<h1>KÄÄNTÄJÄT</h1> 
+	<button onclick="hae_kaantajat()">Kaikki</button>
+	<button onclick="hae_kaantajat_kieli()">Kieli</button> <input type="text" name="kieli"><br><br>
+	<button onclick="hae_kaantajat_aloitusvuosi()">Aloitusvuosi</button> <input type="text" name="aloitusvuosi">
+	<button onclick="hae_kaantajat_erikoisalat()">Erikoisalat </button> <input type="text" name="erikoisalat"><br><br>
+	<textarea name="tekstikentta" rows="20" cols="80"></textarea><br><br>
+	
+	<a href="UusiKaantaja.html">Lisää kääntäjä</a><br><br>
+	
+  <td/>
+  
+  <td>
+	<h1> KIRJAT</h1> 
+	<button onclick="hae_kirjat()">Kaikki</button>
+	<button onclick="hae_kirjat_kaantajalle()">Kääntäjä</button> <input type="text" name="kaant"><br><br>
+	<button onclick="hae_kirjat_luokka()">Luokka</button> <input type="text" name="luokka">
+	<button onclick="hae_kirjat_kieli()">Alkuperäiskieli</button> <input type="text" name="apkieli"><br><br>
+	<textarea name="tekstikentta2" rows="20" cols="80"></textarea><br><br>
+	
+	<a href="UusiKirja.html">Lisää kirja</a><br><br>
+	
+  <td/>
+   
+  <tr/>
+   
+  <TABLE/> 
+  
+</FORM>
+</BODY>
+</HTML>
